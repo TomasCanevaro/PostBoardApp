@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    /* File Layout */
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    /* Environment Settings */
+    "target": "ES2020",              // good for Node 16+
+    "module": "CommonJS",            // Express & ts-node-dev expect CJS
+    "lib": ["ES2020"],
+    "types": ["node"],               // enable Node.js types
+
+    /* Other Outputs */
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    /* Stricter Typechecking */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+
+    /* Style & Safety */
+    "skipLibCheck": true,
+    "esModuleInterop": true          // allows clean `import express from "express"`
+  },
+  "include": ["src"],
+  "exclude": ["node_modules"]
+}
