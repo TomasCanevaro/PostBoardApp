@@ -45,3 +45,25 @@ export const votePost = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Error voting" });
   }
 };
+
+export const removeVote = async (req: Request, res: Response) => {
+  const postId = Number(req.params.postId);
+  const userId = (req as any).userId;
+
+  try {
+    await prisma.vote.delete({
+      where: {
+        userId_postId: { userId, postId },
+      },
+    });
+
+    res.json({ message: "Vote removed" });
+  } catch (err: any) {
+    if (err.code === "P2025") {
+      // Prisma not found error
+      return res.status(404).json({ message: "Vote not found" });
+    }
+    console.error(err);
+    res.status(500).json({ message: "Error removing vote" });
+  }
+};
