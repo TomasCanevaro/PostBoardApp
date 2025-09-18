@@ -5,7 +5,7 @@ type User = {
   id: number;
   username: string;
   email: string;
-  posts: { id: number; title: string; content: string; author: { username: string }; votes: { value: number }[] }[];
+  posts: { id: number; title: string; content: string; author: { id: number; username: string }; score: number; }[];
 };
 
 export default async function UserProfile({ params }: { params: { id: string } }) {

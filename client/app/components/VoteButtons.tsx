@@ -1,9 +1,12 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { apiFetch } from "../lib/api";
 import { authHeader } from "../lib/auth";
 
 export default function VoteButtons({ postId }: { postId: number }) {
+  const router = useRouter();
+
   async function vote(value: number) {
     try {
       await apiFetch(`/votes/${postId}`, {
@@ -13,7 +16,8 @@ export default function VoteButtons({ postId }: { postId: number }) {
           Object.entries(authHeader()).filter(([_, v]) => v !== undefined)
         ),
       });
-      location.reload(); // quick refresh (later swap with state)
+
+      router.refresh(); //Re-fetch the page data
     } catch (err) {
       alert("Error voting");
     }

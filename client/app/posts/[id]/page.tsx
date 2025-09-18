@@ -6,7 +6,7 @@ type Post = {
   title: string;
   content: string;
   author: { username: string };
-  votes: { value: number }[];
+  score: number;
 };
 
 export default async function PostDetail({
@@ -16,7 +16,7 @@ export default async function PostDetail({
 }) {
   const { id } = await params;
   const post = await apiFetch<Post>(`/posts/${id}`);
-  const voteCount = (post.votes ?? []).reduce((sum, v) => sum + v.value, 0);
+  const voteCount = post.score ?? 0;
 
   return (
     <div className="p-4">
